@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-namespace NinjasVsZombies
+namespace NinjasVsZombies.Units
 {
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(Rigidbody2D))]
