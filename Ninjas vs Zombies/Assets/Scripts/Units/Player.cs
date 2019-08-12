@@ -12,6 +12,13 @@ namespace NinjasVsZombies.Units
 
         private Vector2 lookDirection = new Vector2(1f, 0f);
 
+        [Header("Attack")]
+        [SerializeField] private float _attackDelay;
+        private float _nextAttackTime;
+
+        [SerializeField] private float _throwDelay;
+        private float _nextThrowTime;
+
         private Animator _animator;
         private Rigidbody2D _rb2d;
 
@@ -23,6 +30,7 @@ namespace NinjasVsZombies.Units
 
         public void Move(float xDirection)
         {
+
             lookDirection.Set(xDirection, 0);
             lookDirection.Normalize();
 
@@ -46,12 +54,40 @@ namespace NinjasVsZombies.Units
 
         public void Attack()
         {
+            if (!CanAttack())
+            {
+                return;
+            }
+
+            _nextAttackTime = Time.time + _attackDelay;
+
+            _animator.SetTrigger("Attack");
+
             Debug.Log("Player Attack");
+        }
+
+        private bool CanAttack()
+        {
+            return Time.time >= _nextAttackTime;
         }
 
         public void Throw()
         {
+            if (!CanThrow())
+            {
+                return;
+            }
+
+            _nextAttackTime = Time.time + _throwDelay;
+
+            _animator.SetTrigger("Throw");
+
             Debug.Log("Player Throw");
+        }
+
+        private bool CanThrow()
+        {
+            return Time.time >= _nextThrowTime;
         }
 
         public void Slide()

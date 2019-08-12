@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Kunai
   layers:
   - Default
   - TransparentFX
@@ -14,9 +15,9 @@ TagManager:
   - 
   - 
   - Player
-  - 
-  - 
-  - 
+  - Kunai
+  - Enemies
+  - Ground
   - 
   - 
   - 
