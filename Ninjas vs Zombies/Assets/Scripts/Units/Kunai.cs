@@ -8,7 +8,7 @@ namespace NinjasVsZombies.Units
     {
         [Header("Movement")]
         [SerializeField] private float _speed;
-        [SerializeField] private MovementDirection _movementDirection;
+        public MovementDirection _movementDirection;
 
         private Rigidbody2D _rb2d;
 

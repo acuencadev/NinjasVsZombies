@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using NinjasVsZombies.Utils;
+using UnityEngine;
 
 
 namespace NinjasVsZombies.Units
@@ -10,11 +11,13 @@ namespace NinjasVsZombies.Units
         [Header("Movement")]
         [SerializeField] private float _speed;
 
-        private Vector2 lookDirection = new Vector2(1f, 0f);
+        private Vector2 _lookDirection = new Vector2(1f, 0f);
 
         [Header("Attack")]
         [SerializeField] private float _attackDelay;
         private float _nextAttackTime;
+
+        [SerializeField] private Kunai _kunaiPrefab;
 
         [SerializeField] private float _throwDelay;
         private float _nextThrowTime;
@@ -28,16 +31,22 @@ namespace NinjasVsZombies.Units
             _rb2d = GetComponent<Rigidbody2D>();
         }
 
+        private void Start()
+        {
+            _animator.SetFloat("Look X", _lookDirection.x);
+            _animator.SetFloat("Speed", 0f);
+        }
+
         public void Move(float xDirection)
         {
 
-            lookDirection.Set(xDirection, 0);
-            lookDirection.Normalize();
+            _lookDirection.Set(xDirection, 0);
+            _lookDirection.Normalize();
 
-            _animator.SetFloat("Look X", lookDirection.x);
-            _animator.SetFloat("Speed", lookDirection.magnitude);
+            _animator.SetFloat("Look X", _lookDirection.x);
+            _animator.SetFloat("Speed", _lookDirection.magnitude);
 
-            Vector2 newPos = _rb2d.position + lookDirection * _speed * Time.deltaTime;
+            Vector2 newPos = _rb2d.position + _lookDirection * _speed * Time.deltaTime;
 
             _rb2d.MovePosition(newPos);
         }
@@ -73,16 +82,22 @@ namespace NinjasVsZombies.Units
 
         public void Throw()
         {
-            if (!CanThrow())
+            if (!CanThrow() || _kunaiPrefab == null)
             {
                 return;
             }
 
+            MovementDirection kunaiDirection = 
+                Mathf.Approximately(_lookDirection.x, -1f) ? MovementDirection.RightToLeft : MovementDirection.LeftToRight;
+
+            Vector2 kunaiPosition = new Vector2(transform.position.x + (_lookDirection.x * 0.5f), transform.position.y);
+
+            Kunai newKunai = Instantiate(_kunaiPrefab, kunaiPosition, _kunaiPrefab.transform.rotation);
+            newKunai._movementDirection = kunaiDirection;
+
             _nextAttackTime = Time.time + _throwDelay;
 
             _animator.SetTrigger("Throw");
-
-            Debug.Log("Player Throw");
         }
 
         private bool CanThrow()
