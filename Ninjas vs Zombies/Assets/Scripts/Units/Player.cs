@@ -21,21 +21,7 @@ namespace NinjasVsZombies.Units
             _rb2d = GetComponent<Rigidbody2D>();
         }
 
-        private void Update()
-        {
-            float horizontal = Input.GetAxis("Horizontal");
-
-            if (!Mathf.Approximately(horizontal, Mathf.Epsilon))
-            {
-                Move(horizontal);
-            }
-            else
-            {
-                _animator.SetFloat("Speed", 0);
-            }
-        }
-
-        private void Move(float xDirection)
+        public void Move(float xDirection)
         {
             lookDirection.Set(xDirection, 0);
             lookDirection.Normalize();
@@ -46,6 +32,31 @@ namespace NinjasVsZombies.Units
             Vector2 newPos = _rb2d.position + lookDirection * _speed * Time.deltaTime;
 
             _rb2d.MovePosition(newPos);
+        }
+
+        public void StopMoving()
+        {
+            _animator.SetFloat("Speed", 0);
+        }
+
+        public void Jump()
+        {
+            Debug.Log("Player Jump");
+        }
+
+        public void Attack()
+        {
+            Debug.Log("Player Attack");
+        }
+
+        public void Throw()
+        {
+            Debug.Log("Player Throw");
+        }
+
+        public void Slide()
+        {
+            Debug.Log("Player Slide");
         }
     }
 }

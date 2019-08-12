@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using NinjasVsZombies.Units;
+using UnityEngine;
 
 namespace NinjasVsZombies.Managers
 {
@@ -10,33 +11,44 @@ namespace NinjasVsZombies.Managers
         [SerializeField] private KeyCode _throwButton;
         [SerializeField] private KeyCode _slideButton;
 
+        private Player _player;
+
+        private void Awake()
+        {
+            _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        }
+
         private void Update()
         {
             float horizontal = Input.GetAxis("Horizontal");
 
             if (!Mathf.Approximately(horizontal, Mathf.Epsilon))
             {
-                Debug.Log($"Moving to {horizontal}");
+                _player.Move(horizontal);
+            }
+            else
+            {
+                _player.StopMoving();
             }
 
             if (Input.GetKeyDown(_jumpButton))
             {
-                Debug.Log("Jump!");
+                _player.Jump();
             }
 
             if (Input.GetKeyDown(_attackButton))
             {
-                Debug.Log("Attack!");
+                _player.Attack();
             }
 
             if (Input.GetKeyDown(_throwButton))
             {
-                Debug.Log("Throw!");
+                _player.Throw();
             }
 
             if (Input.GetKeyDown(_slideButton))
             {
-                Debug.Log("Slide!");
+                _player.Slide();
             }
         }
     }
