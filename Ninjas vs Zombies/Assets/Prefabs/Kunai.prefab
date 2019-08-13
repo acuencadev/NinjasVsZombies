@@ -144,3 +144,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 6
   _movementDirection: 0
+  _lifeSpan: 4

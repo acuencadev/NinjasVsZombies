@@ -10,11 +10,16 @@ namespace NinjasVsZombies.Units
         [SerializeField] private float _speed;
         public MovementDirection _movementDirection;
 
+        [Header("Lifespan")]
+        [SerializeField] private float _lifeSpan;
+
         private Rigidbody2D _rb2d;
 
         private void Awake()
         {
             _rb2d = GetComponent<Rigidbody2D>();
+
+            Destroy(gameObject, _lifeSpan);
         }
 
         private void Start()
