@@ -17,6 +17,10 @@ namespace NinjasVsZombies.Units
         [SerializeField] private float _attackDelay;
         private float _nextAttackTime;
 
+        [SerializeField] private Transform _attackPos;
+        [SerializeField] private Vector2 _attackArea;
+        [SerializeField] private LayerMask _whatIsEnemy;
+
         [Header("Throw Attack")]
         [SerializeField] private Kunai _kunaiPrefab;
 
@@ -36,6 +40,12 @@ namespace NinjasVsZombies.Units
         {
             _animator.SetFloat("Look X", _lookDirection.x);
             _animator.SetFloat("Speed", 0f);
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(_attackPos.position, _attackArea);
         }
 
         public void Move(float xDirection)
@@ -74,6 +84,16 @@ namespace NinjasVsZombies.Units
             _animator.SetTrigger("Attack");
 
             Debug.Log("Player Attack");
+        }
+
+        public void DamageEnemiesOnAttack()
+        {
+            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(_attackPos.position, _attackArea, 0f, _whatIsEnemy);
+
+            foreach (Collider2D collider in enemiesToDamage)
+            {
+                //TODO: Damage enemy.
+            }
         }
 
         private bool CanAttack()
