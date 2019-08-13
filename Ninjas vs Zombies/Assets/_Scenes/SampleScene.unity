@@ -416,4 +416,4 @@ MonoBehaviour:
   _attackDelay: 1
   _kunaiPrefab: {fileID: 1901810322418083322, guid: 0157a4a100551de4dbb2aea3ccfdd802,
     type: 3}
-  _throwDelay: 3
+  _throwDelay: 1.5

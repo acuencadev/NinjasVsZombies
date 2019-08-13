@@ -17,6 +17,7 @@ namespace NinjasVsZombies.Units
         [SerializeField] private float _attackDelay;
         private float _nextAttackTime;
 
+        [Header("Throw Attack")]
         [SerializeField] private Kunai _kunaiPrefab;
 
         [SerializeField] private float _throwDelay;
@@ -87,17 +88,20 @@ namespace NinjasVsZombies.Units
                 return;
             }
 
-            MovementDirection kunaiDirection = 
+            _nextThrowTime = Time.time + _throwDelay;
+
+            _animator.SetTrigger("Throw");
+        }
+
+        public void ThrowKunai()
+        {
+            MovementDirection kunaiDirection =
                 Mathf.Approximately(_lookDirection.x, -1f) ? MovementDirection.RightToLeft : MovementDirection.LeftToRight;
 
             Vector2 kunaiPosition = new Vector2(transform.position.x + (_lookDirection.x * 0.5f), transform.position.y);
 
             Kunai newKunai = Instantiate(_kunaiPrefab, kunaiPosition, _kunaiPrefab.transform.rotation);
             newKunai._movementDirection = kunaiDirection;
-
-            _nextAttackTime = Time.time + _throwDelay;
-
-            _animator.SetTrigger("Throw");
         }
 
         private bool CanThrow()
