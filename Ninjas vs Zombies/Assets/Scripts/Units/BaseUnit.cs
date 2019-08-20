@@ -26,7 +26,18 @@ namespace NinjasVsZombies.Units
             _animator.SetFloat("Speed", 0f);
         }
 
-        public abstract void Move(float xDirection);
+        public virtual void Move(float xDirection)
+        {
+            _lookDirection.Set(xDirection, 0);
+            _lookDirection.Normalize();
+
+            _animator.SetFloat("Look X", _lookDirection.x);
+            _animator.SetFloat("Speed", _lookDirection.magnitude);
+
+            Vector2 newPos = _rb2d.position + _lookDirection * _speed * Time.deltaTime;
+
+            _rb2d.MovePosition(newPos);
+        }
 
         public abstract bool CanAttack();
 

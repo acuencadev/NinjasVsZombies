@@ -20,34 +20,10 @@ namespace NinjasVsZombies.Units
         [SerializeField] private float _throwDelay;
         private float _nextThrowTime;
 
-        protected override void Awake()
-        {
-            base.Awake();
-        }
-
-        protected override void Start()
-        {
-            base.Start();
-        }
-
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireCube(_attackPos.position, _attackArea);
-        }
-
-        public override void Move(float xDirection)
-        {
-
-            _lookDirection.Set(xDirection, 0);
-            _lookDirection.Normalize();
-
-            _animator.SetFloat("Look X", _lookDirection.x);
-            _animator.SetFloat("Speed", _lookDirection.magnitude);
-
-            Vector2 newPos = _rb2d.position + _lookDirection * _speed * Time.deltaTime;
-
-            _rb2d.MovePosition(newPos);
         }
 
         public override bool CanAttack()

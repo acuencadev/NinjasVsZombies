@@ -7,24 +7,9 @@ namespace NinjasVsZombies.Units
     {
         [SerializeField] private MovementDirection _movementDirection;
 
-        protected override void Awake()
-        {
-            base.Awake();
-        }
-
-        protected override void Start()
-        {
-            base.Start();
-        }
-
-        public override void Move(float xDirection)
-        {
-
-        }
-
         public override void Attack()
         {
-
+            throw new System.NotImplementedException();
         }
 
         public override bool CanAttack()
