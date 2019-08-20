@@ -4,15 +4,8 @@ using UnityEngine;
 
 namespace NinjasVsZombies.Units
 {
-    [RequireComponent(typeof(Animator))]
-    [RequireComponent(typeof(Rigidbody2D))]
-    public class Player : MonoBehaviour
+    public class Player : BaseUnit
     {
-        [Header("Movement")]
-        [SerializeField] private float _speed;
-
-        private Vector2 _lookDirection = new Vector2(1f, 0f);
-
         [Header("Attack")]
         [SerializeField] private float _attackDelay;
         private float _nextAttackTime;
@@ -27,19 +20,14 @@ namespace NinjasVsZombies.Units
         [SerializeField] private float _throwDelay;
         private float _nextThrowTime;
 
-        private Animator _animator;
-        private Rigidbody2D _rb2d;
-
-        private void Awake()
+        protected override void Awake()
         {
-            _animator = GetComponent<Animator>();
-            _rb2d = GetComponent<Rigidbody2D>();
+            base.Awake();
         }
 
-        private void Start()
+        protected override void Start()
         {
-            _animator.SetFloat("Look X", _lookDirection.x);
-            _animator.SetFloat("Speed", 0f);
+            base.Start();
         }
 
         private void OnDrawGizmosSelected()
@@ -48,7 +36,7 @@ namespace NinjasVsZombies.Units
             Gizmos.DrawWireCube(_attackPos.position, _attackArea);
         }
 
-        public void Move(float xDirection)
+        public override void Move(float xDirection)
         {
 
             _lookDirection.Set(xDirection, 0);
@@ -62,17 +50,12 @@ namespace NinjasVsZombies.Units
             _rb2d.MovePosition(newPos);
         }
 
-        public void StopMoving()
+        public override bool CanAttack()
         {
-            _animator.SetFloat("Speed", 0);
+            return Time.time >= _nextAttackTime;
         }
 
-        public void Jump()
-        {
-            Debug.Log("Player Jump");
-        }
-
-        public void Attack()
+        public override void Attack()
         {
             if (!CanAttack())
             {
@@ -86,6 +69,21 @@ namespace NinjasVsZombies.Units
             Debug.Log("Player Attack");
         }
 
+        public override void Die()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void StopMoving()
+        {
+            _animator.SetFloat("Speed", 0);
+        }
+
+        public void Jump()
+        {
+            Debug.Log("Player Jump");
+        }
+
         public void DamageEnemiesOnAttack()
         {
             Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(_attackPos.position, _attackArea, 0f, _whatIsEnemy);
@@ -94,11 +92,6 @@ namespace NinjasVsZombies.Units
             {
                 //TODO: Damage enemy.
             }
-        }
-
-        private bool CanAttack()
-        {
-            return Time.time >= _nextAttackTime;
         }
 
         public void Throw()

@@ -3,39 +3,38 @@ using UnityEngine;
 
 namespace NinjasVsZombies.Units
 {
-    [RequireComponent(typeof(Animator))]
-    [RequireComponent(typeof(Rigidbody2D))]
-    public class Zombie : MonoBehaviour
+    public class Zombie : BaseUnit
     {
-        [Header("Movement")]
-        [SerializeField] private float _speed;
         [SerializeField] private MovementDirection _movementDirection;
 
-        private Vector2 _lookDirection = new Vector2(1f, 0f);
-
-        private Animator _animator;
-        private Rigidbody2D _rb2d;
-
-        private void Awake()
+        protected override void Awake()
         {
-            _animator = GetComponent<Animator>();
-            _rb2d = GetComponent<Rigidbody2D>();
+            base.Awake();
         }
 
-        private void Start()
+        protected override void Start()
         {
-            _animator.SetFloat("Look X", _lookDirection.x);
-            _animator.SetFloat("Speed", 0f);
+            base.Start();
         }
 
-        public void Move(float xDirection)
+        public override void Move(float xDirection)
         {
 
         }
 
-        public void Attack()
+        public override void Attack()
         {
 
+        }
+
+        public override bool CanAttack()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Die()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
