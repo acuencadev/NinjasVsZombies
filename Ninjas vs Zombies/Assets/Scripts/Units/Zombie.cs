@@ -12,6 +12,14 @@ namespace NinjasVsZombies.Units
             Move((float)_movementDirection);
         }
 
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                _animator.SetTrigger("Attack");
+            }
+        }
+
         public override void Attack()
         {
             throw new System.NotImplementedException();
