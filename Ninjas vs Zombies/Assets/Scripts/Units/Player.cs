@@ -41,8 +41,6 @@ namespace NinjasVsZombies.Units
             _nextAttackTime = Time.time + _attackDelay;
 
             _animator.SetTrigger("Attack");
-
-            Debug.Log("Player Attack");
         }
 
         public override void Die()
@@ -66,7 +64,7 @@ namespace NinjasVsZombies.Units
 
             foreach (Collider2D collider in enemiesToDamage)
             {
-                //TODO: Damage enemy.
+                collider.GetComponent<Zombie>().Die();
             }
         }
 

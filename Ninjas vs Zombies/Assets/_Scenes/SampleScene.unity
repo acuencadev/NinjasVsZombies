@@ -416,7 +416,7 @@ MonoBehaviour:
   _speed: 3
   _attackDelay: 1
   _attackPos: {fileID: 2121925291}
-  _attackArea: {x: 0.5, y: 1.4}
+  _attackArea: {x: 1, y: 1.4}
   _whatIsEnemy:
     serializedVersion: 2
     m_Bits: 1024

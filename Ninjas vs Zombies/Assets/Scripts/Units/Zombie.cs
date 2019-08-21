@@ -32,7 +32,8 @@ namespace NinjasVsZombies.Units
 
         public override void Die()
         {
-            throw new System.NotImplementedException();
+            _animator.SetTrigger("Die");
+            _rb2d.simulated = false;
         }
     }
 }
