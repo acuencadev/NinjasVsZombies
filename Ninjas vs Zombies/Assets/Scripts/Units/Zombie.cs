@@ -7,6 +7,11 @@ namespace NinjasVsZombies.Units
     {
         [SerializeField] private MovementDirection _movementDirection;
 
+        protected void Update()
+        {
+            Move((float)_movementDirection);
+        }
+
         public override void Attack()
         {
             throw new System.NotImplementedException();
