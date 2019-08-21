@@ -18,6 +18,11 @@ namespace NinjasVsZombies.Units
             {
                 _animator.SetTrigger("Attack");
             }
+            else if (other.CompareTag("Kunai"))
+            {
+                Destroy(other.gameObject);
+                Die();
+            }
         }
 
         public override void Attack()
@@ -34,6 +39,9 @@ namespace NinjasVsZombies.Units
         {
             _animator.SetTrigger("Die");
             _rb2d.simulated = false;
+
+            //FIXME: Fade out the enemy and then destroy it.
+            Destroy(gameObject, 2f);
         }
     }
 }
