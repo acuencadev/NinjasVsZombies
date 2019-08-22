@@ -39,10 +39,6 @@ namespace NinjasVsZombies.Units
             _rb2d.MovePosition(newPos);
         }
 
-        public abstract bool CanAttack();
-
-        public abstract void Attack();
-
         public abstract void Die();
     }
 }

@@ -20,18 +20,30 @@ namespace NinjasVsZombies.Units
         [SerializeField] private float _throwDelay;
         private float _nextThrowTime;
 
+        [Header("Health")]
+        [SerializeField] private int _initialLives;
+
+        private int _lives;
+
+        protected override void Start()
+        {
+            base.Start();
+
+            _lives = _initialLives;
+        }
+
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireCube(_attackPos.position, _attackArea);
         }
 
-        public override bool CanAttack()
+        private bool CanAttack()
         {
             return Time.time >= _nextAttackTime;
         }
 
-        public override void Attack()
+        public void Attack()
         {
             if (!CanAttack())
             {
@@ -99,6 +111,19 @@ namespace NinjasVsZombies.Units
         public void Slide()
         {
             Debug.Log("Player Slide");
+        }
+
+        public void TakeDamage()
+        {
+            _lives = Mathf.Clamp(_lives - 1, 0, _initialLives);
+
+            Debug.Log(_lives);
+
+            if (_lives == 0)
+            {
+                //TODO: Die! Not you... the player.
+                Debug.Log("Player Died");
+            }
         }
     }
 }

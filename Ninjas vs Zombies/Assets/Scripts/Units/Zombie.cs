@@ -17,22 +17,19 @@ namespace NinjasVsZombies.Units
             if (other.CompareTag("Player"))
             {
                 _animator.SetTrigger("Attack");
+
+                Player player = other.GetComponent<Player>();
+
+                if (player != null)
+                {
+                    player.TakeDamage();
+                }
             }
             else if (other.CompareTag("Kunai"))
             {
                 Destroy(other.gameObject);
                 Die();
             }
-        }
-
-        public override void Attack()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override bool CanAttack()
-        {
-            throw new System.NotImplementedException();
         }
 
         public override void Die()
