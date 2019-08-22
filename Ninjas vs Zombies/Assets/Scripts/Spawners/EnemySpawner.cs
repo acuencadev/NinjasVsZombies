@@ -12,6 +12,32 @@ namespace NinjasVsZombies.Spawners
         [SerializeField] private float _maxSpawnDelay;
 
         private float _spawnDelay;
-        private float _nextThrowTime;
+        private float _nextSpawnTime;
+
+        [Header("Enemies Holder")]
+        [SerializeField] private Transform _enemyHolder;
+
+        private void Update()
+        {
+            if (ShouldSpawn())
+            {
+                Spawn();
+            }
+        }
+
+        private bool ShouldSpawn()
+        {
+            return Time.time >= _nextSpawnTime;
+        }
+
+        private void Spawn()
+        {
+            int randomPrefabIndex = Random.Range(0, _enemyPrefabs.Length);
+            Instantiate(_enemyPrefabs[randomPrefabIndex], transform.position, transform.rotation, _enemyHolder);
+
+            float randomSpawnDelay = Random.Range(_minSpawnDelay, _maxSpawnDelay);
+
+            _nextSpawnTime = Time.time + randomSpawnDelay;
+        }
     }
 }
