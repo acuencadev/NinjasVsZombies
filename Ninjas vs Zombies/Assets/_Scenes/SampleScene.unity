@@ -266,8 +266,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefabs:
   - {fileID: 5678076326451978242, guid: bb36986aef764c841a9bc923d96f3a70, type: 3}
-  _minSpawnDelay: 2
-  _maxSpawnDelay: 5
+  _minSpawnDelay: 3
+  _maxSpawnDelay: 6
   _enemyHolder: {fileID: 1231610143}
 --- !u!4 &1067473861
 Transform:
@@ -328,8 +328,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefabs:
   - {fileID: 1704332648914004183, guid: bf4b5ed4027d3214e8c31d38abbf24f5, type: 3}
-  _minSpawnDelay: 2
-  _maxSpawnDelay: 5
+  _minSpawnDelay: 3
+  _maxSpawnDelay: 6
   _enemyHolder: {fileID: 1231610143}
 --- !u!1 &1231610142
 GameObject:
