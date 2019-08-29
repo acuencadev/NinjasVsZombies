@@ -20,6 +20,8 @@ namespace NinjasVsZombies.Units
         [SerializeField] private float _throwDelay;
         private float _nextThrowTime;
 
+        [SerializeField] private Transform _kunaiHolder;
+
         [Header("Health")]
         [SerializeField] private int _initialLives;
 
@@ -99,7 +101,7 @@ namespace NinjasVsZombies.Units
 
             Vector2 kunaiPosition = new Vector2(transform.position.x + (_lookDirection.x * 0.5f), transform.position.y);
 
-            Kunai newKunai = Instantiate(_kunaiPrefab, kunaiPosition, _kunaiPrefab.transform.rotation);
+            Kunai newKunai = Instantiate(_kunaiPrefab, kunaiPosition, _kunaiPrefab.transform.rotation, _kunaiHolder);
             newKunai._movementDirection = kunaiDirection;
         }
 
