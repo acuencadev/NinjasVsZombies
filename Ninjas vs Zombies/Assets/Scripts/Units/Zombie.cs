@@ -7,7 +7,7 @@ namespace NinjasVsZombies.Units
     {
         [SerializeField] private MovementDirection _movementDirection;
 
-        protected void Update()
+        protected override void Start()
         {
             Move((float)_movementDirection);
         }
@@ -30,6 +30,21 @@ namespace NinjasVsZombies.Units
                 Destroy(other.gameObject);
                 Die();
             }
+        }
+
+        public override void Move(float xDirection)
+        {
+            _lookDirection.Set(xDirection, 0);
+            _lookDirection.Normalize();
+
+            _animator.SetFloat("Look X", _lookDirection.x);
+            _animator.SetFloat("Speed", _lookDirection.magnitude);
+
+            Vector2 velocity = _lookDirection * _speed * Time.fixedDeltaTime;
+
+            Debug.Log(velocity);
+
+            _rb2d.velocity = velocity;
         }
 
         public override void Die()
