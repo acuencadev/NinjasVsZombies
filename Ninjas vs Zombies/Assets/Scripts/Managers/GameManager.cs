@@ -12,6 +12,7 @@ namespace NinjasVsZombies.Managers
 
         private void Awake()
         {
+            MakeSingleton();
             gameStatus = GameStatus.NOT_STARTED;
         }
 

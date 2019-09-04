@@ -35,13 +35,15 @@ namespace NinjasVsZombies.UI
 
         public void PauseGame()
         {
-            Debug.Log("Pausing the game...");
+            _pausePanel.SetActive(true);
+            _pauseButton.SetActive(false);
             GameManager.instance.gameStatus = Utils.GameStatus.PAUSED;
         }
 
         public void ResumeGame()
         {
-            Debug.Log("Resuming the game...");
+            _pausePanel.SetActive(false);
+            _pauseButton.SetActive(true);
             GameManager.instance.gameStatus = Utils.GameStatus.PLAYING;
         }
 
