@@ -52,6 +52,8 @@ namespace NinjasVsZombies.Units
         public override void Die()
         {
             _animator.SetTrigger("Die");
+
+            //FIXME: Use a raycast to detect the player and animate the attack. Remove the second collider.
             _rb2d.simulated = false;
 
             ScoreManager.instance.IncreaseScore(_pointsPerKill);
