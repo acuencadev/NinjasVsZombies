@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using NinjasVsZombies.Managers;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace NinjasVsZombies.UI
@@ -8,6 +9,7 @@ namespace NinjasVsZombies.UI
         public void PlayGame()
         {
             SceneManager.LoadScene("SampleScene");
+            GameManager.instance.gameStatus = Utils.GameStatus.PLAYING;
         }
 
         public void QuitGame()

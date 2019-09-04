@@ -20,35 +20,38 @@ namespace NinjasVsZombies.Managers
 
         private void Update()
         {
-            float horizontal = Input.GetAxis("Horizontal");
+            if (GameManager.instance.gameStatus == Utils.GameStatus.PLAYING)
+            {
+                float horizontal = Input.GetAxis("Horizontal");
 
-            if (!Mathf.Approximately(horizontal, Mathf.Epsilon))
-            {
-                _player.Move(horizontal);
-            }
-            else
-            {
-                _player.StopMoving();
-            }
+                if (!Mathf.Approximately(horizontal, Mathf.Epsilon))
+                {
+                    _player.Move(horizontal);
+                }
+                else
+                {
+                    _player.StopMoving();
+                }
 
-            if (Input.GetKeyDown(_jumpButton))
-            {
-                _player.Jump();
-            }
+                if (Input.GetKeyDown(_jumpButton))
+                {
+                    _player.Jump();
+                }
 
-            if (Input.GetKeyDown(_attackButton))
-            {
-                _player.Attack();
-            }
+                if (Input.GetKeyDown(_attackButton))
+                {
+                    _player.Attack();
+                }
 
-            if (Input.GetKeyDown(_throwButton))
-            {
-                _player.Throw();
-            }
+                if (Input.GetKeyDown(_throwButton))
+                {
+                    _player.Throw();
+                }
 
-            if (Input.GetKeyDown(_slideButton))
-            {
-                _player.Slide();
+                if (Input.GetKeyDown(_slideButton))
+                {
+                    _player.Slide();
+                }
             }
         }
     }

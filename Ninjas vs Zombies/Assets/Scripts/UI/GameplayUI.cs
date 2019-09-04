@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using NinjasVsZombies.Managers;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace NinjasVsZombies.UI
@@ -35,21 +36,25 @@ namespace NinjasVsZombies.UI
         public void PauseGame()
         {
             Debug.Log("Pausing the game...");
+            GameManager.instance.gameStatus = Utils.GameStatus.PAUSED;
         }
 
         public void ResumeGame()
         {
             Debug.Log("Resuming the game...");
+            GameManager.instance.gameStatus = Utils.GameStatus.PLAYING;
         }
 
         public void RestartGame()
         {
             Debug.Log("Restarting the game...");
+            GameManager.instance.gameStatus = Utils.GameStatus.PLAYING;
         }
 
         public void BackToMainMenu()
         {
             Debug.Log("Going back to main menu...");
+            GameManager.instance.gameStatus = Utils.GameStatus.NOT_STARTED;
         }
 
         public void UpdateScore(int newScore)

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using NinjasVsZombies.Managers;
+using UnityEngine;
 
 namespace NinjasVsZombies.Spawners
 {
@@ -19,7 +20,7 @@ namespace NinjasVsZombies.Spawners
 
         private void Update()
         {
-            if (ShouldSpawn())
+            if (ShouldSpawn() && GameManager.instance.gameStatus == Utils.GameStatus.PLAYING)
             {
                 Spawn();
             }
