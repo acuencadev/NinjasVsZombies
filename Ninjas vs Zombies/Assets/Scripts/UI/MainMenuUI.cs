@@ -8,8 +8,13 @@ namespace NinjasVsZombies.UI
     {
         public void PlayGame()
         {
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("Gameplay");
             GameManager.instance.gameStatus = Utils.GameStatus.PLAYING;
+        }
+
+        public void Highscore()
+        {
+            SceneManager.LoadScene("Highscore");
         }
 
         public void QuitGame()
