@@ -1,4 +1,5 @@
-﻿using NinjasVsZombies.Utils;
+﻿using NinjasVsZombies.UI;
+using NinjasVsZombies.Utils;
 using UnityEngine;
 
 
@@ -34,6 +35,8 @@ namespace NinjasVsZombies.Units
             base.Start();
 
             _lives = _initialLives;
+            GameplayUI.instance.UpdateScore(0);
+            GameplayUI.instance.UpdateLives(_lives);
         }
 
         private void OnDrawGizmosSelected()
@@ -133,6 +136,8 @@ namespace NinjasVsZombies.Units
         public void TakeDamage()
         {
             _lives = Mathf.Clamp(_lives - 1, 0, _initialLives);
+
+            GameplayUI.instance.UpdateLives(_lives);
 
             Debug.Log(_lives);
 

@@ -5,6 +5,8 @@ namespace NinjasVsZombies.UI
 {
     public class GameplayUI : MonoBehaviour
     {
+        public static GameplayUI instance;
+
         [Header("HUD")]
         [SerializeField] private Text _scoreText;
         [SerializeField] private Text _livesText;
@@ -12,6 +14,23 @@ namespace NinjasVsZombies.UI
         [Header("Pause")]
         [SerializeField] private GameObject _pausePanel;
         [SerializeField] private GameObject _pauseButton;
+
+        private void Awake()
+        {
+            MakeSingleton();
+        }
+
+        private void MakeSingleton()
+        {
+            if (instance != null)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                instance = this;
+            }
+        }
 
         public void PauseGame()
         {
@@ -40,7 +59,7 @@ namespace NinjasVsZombies.UI
 
         public void UpdateLives(int newLives)
         {
-            _livesText.text = $"Score: {newLives}";
+            _livesText.text = $"Lives: {newLives}";
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using NinjasVsZombies.UI;
+using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -32,6 +33,6 @@ public class ScoreManager : MonoBehaviour
     {
         _currentScore += newScore;
 
-        Debug.Log($"Score: {_currentScore}");
+        GameplayUI.instance.UpdateScore(_currentScore);
     }
 }
