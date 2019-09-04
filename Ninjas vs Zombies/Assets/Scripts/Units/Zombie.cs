@@ -42,8 +42,6 @@ namespace NinjasVsZombies.Units
 
             Vector2 velocity = _lookDirection * _speed * Time.fixedDeltaTime;
 
-            Debug.Log(velocity);
-
             _rb2d.velocity = velocity;
         }
 
