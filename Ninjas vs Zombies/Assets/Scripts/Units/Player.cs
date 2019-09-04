@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace NinjasVsZombies.Units
 {
+    [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(Rigidbody2D))]
     public class Player : BaseUnit
     {
         [Header("Attack")]

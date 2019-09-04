@@ -165,6 +165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 50
   _movementDirection: -1
+  _pointsPerKill: 1
 --- !u!1 &7251707612157421256
 GameObject:
   m_ObjectHideFlags: 0

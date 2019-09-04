@@ -5,7 +5,11 @@ namespace NinjasVsZombies.Units
 {
     public class Zombie : BaseUnit
     {
+        [Header("Movement")]
         [SerializeField] private MovementDirection _movementDirection;
+
+        [Header("Score Points")]
+        [SerializeField] private int _pointsPerKill;
 
         protected override void Start()
         {
@@ -49,6 +53,8 @@ namespace NinjasVsZombies.Units
         {
             _animator.SetTrigger("Die");
             _rb2d.simulated = false;
+
+            ScoreManager.instance.IncreaseScore(_pointsPerKill);
 
             //FIXME: Fade out the enemy and then destroy it.
             Destroy(gameObject, 2f);
