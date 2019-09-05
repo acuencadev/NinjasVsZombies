@@ -17,6 +17,9 @@ namespace NinjasVsZombies.UI
         [SerializeField] private GameObject _pausePanel;
         [SerializeField] private GameObject _pauseButton;
 
+        [Header("Game Over")]
+        [SerializeField] private GameObject _gameOverPanel;
+
         private void Awake()
         {
             MakeSingleton();
@@ -36,6 +39,7 @@ namespace NinjasVsZombies.UI
 
         public void PauseGame()
         {
+            _gameOverPanel.SetActive(false);
             _pausePanel.SetActive(true);
             _pauseButton.SetActive(false);
             GameManager.instance.gameStatus = Utils.GameStatus.PAUSED;
@@ -43,6 +47,7 @@ namespace NinjasVsZombies.UI
 
         public void ResumeGame()
         {
+            _gameOverPanel.SetActive(false);
             _pausePanel.SetActive(false);
             _pauseButton.SetActive(true);
             GameManager.instance.gameStatus = Utils.GameStatus.PLAYING;
@@ -52,6 +57,14 @@ namespace NinjasVsZombies.UI
         {
             GameManager.instance.gameStatus = Utils.GameStatus.PLAYING;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        public void GameOver()
+        {
+            GameManager.instance.gameStatus = Utils.GameStatus.GAME_OVER;
+            _gameOverPanel.SetActive(true);
+            _pauseButton.SetActive(false);
+            _pausePanel.SetActive(false);
         }
 
         public void BackToMainMenu()

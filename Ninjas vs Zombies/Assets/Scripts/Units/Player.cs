@@ -1,7 +1,6 @@
 ﻿using NinjasVsZombies.UI;
 using NinjasVsZombies.Utils;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace NinjasVsZombies.Units
 {
@@ -77,7 +76,8 @@ namespace NinjasVsZombies.Units
 
         public override void Die()
         {
-            throw new System.NotImplementedException();
+            _animator.SetTrigger("Die");
+            _rb2d.simulated = false;
         }
 
         public void StopMoving()
@@ -139,12 +139,11 @@ namespace NinjasVsZombies.Units
 
             GameplayUI.instance.UpdateLives(_lives);
 
-            Debug.Log(_lives);
-
             if (_lives == 0)
             {
-                //TODO: Die! Not you... the player.
-                Debug.Log("Player Died");
+                Die();
+
+                GameplayUI.instance.GameOver();
                 HighscoreDB.Instance.SetHighscore(ScoreManager.instance.GetScore());
             }
         }
