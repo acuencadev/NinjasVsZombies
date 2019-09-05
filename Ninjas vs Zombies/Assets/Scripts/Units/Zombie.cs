@@ -11,28 +11,34 @@ namespace NinjasVsZombies.Units
         [Header("Score Points")]
         [SerializeField] private int _pointsPerKill;
 
+        private bool _isAlive;
+
         protected override void Start()
         {
+            _isAlive = true;
             Move((float)_movementDirection);
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Player"))
+            if (_isAlive)
             {
-                _animator.SetTrigger("Attack");
-
-                Player player = other.GetComponent<Player>();
-
-                if (player != null)
+                if (other.CompareTag("Player"))
                 {
-                    player.TakeDamage();
+                    _animator.SetTrigger("Attack");
+
+                    Player player = other.GetComponent<Player>();
+
+                    if (player != null)
+                    {
+                        player.TakeDamage();
+                    }
                 }
-            }
-            else if (other.CompareTag("Kunai"))
-            {
-                Destroy(other.gameObject);
-                Die();
+                else if (other.CompareTag("Kunai"))
+                {
+                    Destroy(other.gameObject);
+                    Die();
+                }
             }
         }
 
@@ -51,15 +57,18 @@ namespace NinjasVsZombies.Units
 
         public override void Die()
         {
-            _animator.SetTrigger("Die");
+            if (_isAlive)
+            {
+                _animator.SetTrigger("Die");
 
-            //FIXME: Use a raycast to detect the player and animate the attack. Remove the second collider.
-            _rb2d.simulated = false;
+                _isAlive = false;
+                _rb2d.velocity = Vector2.zero;
 
-            ScoreManager.instance.IncreaseScore(_pointsPerKill);
+                ScoreManager.instance.IncreaseScore(_pointsPerKill);
 
-            //FIXME: Fade out the enemy and then destroy it.
-            Destroy(gameObject, 20f);
+                //FIXME: Fade out the enemy and then destroy it.
+                Destroy(gameObject, 20f);
+            }
         }
     }
 }
