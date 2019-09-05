@@ -1,7 +1,7 @@
 ﻿using NinjasVsZombies.UI;
 using NinjasVsZombies.Utils;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 namespace NinjasVsZombies.Units
 {
@@ -145,6 +145,7 @@ namespace NinjasVsZombies.Units
             {
                 //TODO: Die! Not you... the player.
                 Debug.Log("Player Died");
+                HighscoreDB.Instance.SetHighscore(ScoreManager.instance.GetScore());
             }
         }
     }
