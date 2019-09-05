@@ -59,7 +59,7 @@ namespace NinjasVsZombies.Units
             ScoreManager.instance.IncreaseScore(_pointsPerKill);
 
             //FIXME: Fade out the enemy and then destroy it.
-            Destroy(gameObject, 2f);
+            Destroy(gameObject, 20f);
         }
     }
 }

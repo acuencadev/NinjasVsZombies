@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1704332648914004189}
   m_Layer: 10
   m_Name: MaleZombieRightToLeft
-  m_TagString: MaleZombie
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -504472973
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b1c223ddc28c9ec468af33adf6d36786, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
