@@ -1,4 +1,5 @@
-﻿using NinjasVsZombies.UI;
+﻿using NinjasVsZombies.Managers;
+using NinjasVsZombies.UI;
 using NinjasVsZombies.Utils;
 using UnityEngine;
 
@@ -26,6 +27,10 @@ namespace NinjasVsZombies.Units
 
         [Header("Health")]
         [SerializeField] private int _initialLives;
+
+        [Header("SFX")]
+        [SerializeField] private AudioClip _attackClip;
+        [SerializeField] private AudioClip _throwClip;
 
         private int _lives;
 
@@ -59,6 +64,8 @@ namespace NinjasVsZombies.Units
             _nextAttackTime = Time.time + _attackDelay;
 
             _animator.SetTrigger("Attack");
+
+            AudioManager.instance.PlayClip(_attackClip);
         }
 
         public override void Move(float xDirection)
@@ -106,6 +113,8 @@ namespace NinjasVsZombies.Units
             {
                 return;
             }
+
+            AudioManager.instance.PlayClip(_throwClip);
 
             _nextThrowTime = Time.time + _throwDelay;
 
