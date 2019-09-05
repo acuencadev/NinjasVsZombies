@@ -31,6 +31,7 @@ namespace NinjasVsZombies.Units
         [Header("SFX")]
         [SerializeField] private AudioClip _attackClip;
         [SerializeField] private AudioClip _throwClip;
+        [SerializeField] private AudioClip _gameOverClip;
 
         private int _lives;
 
@@ -153,6 +154,7 @@ namespace NinjasVsZombies.Units
                 Die();
 
                 GameplayUI.instance.GameOver();
+                AudioManager.instance.PlayClip(_gameOverClip);
                 HighscoreDB.Instance.SetHighscore(ScoreManager.instance.GetScore());
             }
         }
