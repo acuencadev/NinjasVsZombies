@@ -70,6 +70,7 @@ namespace NinjasVsZombies.UI
 
         public void BackToMainMenu()
         {
+            AudioManager.instance.StopZombieSfx();
             GameManager.instance.gameStatus = Utils.GameStatus.NOT_STARTED;
             SceneManager.LoadScene("MainMenu");
         }

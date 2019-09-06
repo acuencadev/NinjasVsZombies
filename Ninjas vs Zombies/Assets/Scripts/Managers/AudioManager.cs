@@ -7,6 +7,7 @@ namespace NinjasVsZombies.Managers
         public static AudioManager instance;
 
         [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private AudioSource _zombieSfx;
 
         private void Awake()
         {
@@ -30,6 +31,16 @@ namespace NinjasVsZombies.Managers
         {
             _audioSource.clip = audioClip;
             _audioSource.Play();
+        }
+
+        public void PlayZombieSfx()
+        {
+            _zombieSfx.Play();
+        }
+
+        public void StopZombieSfx()
+        {
+            _zombieSfx.Stop();
         }
     }
 }

@@ -10,6 +10,7 @@ namespace NinjasVsZombies.UI
         {
             SceneManager.LoadScene("Gameplay");
             GameManager.instance.gameStatus = Utils.GameStatus.PLAYING;
+            AudioManager.instance.PlayZombieSfx();
         }
 
         public void Highscore()
