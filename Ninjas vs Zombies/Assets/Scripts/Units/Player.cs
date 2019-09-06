@@ -168,5 +168,11 @@ namespace NinjasVsZombies.Units
                 HighscoreDB.Instance.SetHighscore(ScoreManager.instance.GetScore());
             }
         }
+
+        public void CollectKunai(int kunais)
+        {
+            _numKunais += kunais;
+            GameplayUI.instance.UpdateNumKunais(_numKunais);
+        }
     }
 }
