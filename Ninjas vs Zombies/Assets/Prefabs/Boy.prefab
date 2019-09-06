@@ -204,10 +204,12 @@ MonoBehaviour:
   _kunaiPrefab: {fileID: 1901810322418083322, guid: 0157a4a100551de4dbb2aea3ccfdd802,
     type: 3}
   _throwDelay: 1.5
+  _initialKunais: 5
   _kunaiHolder: {fileID: 2110659825}
   _initialLives: 3
   _attackClip: {fileID: 8300000, guid: 77f4bf62355088245963cdb55728c588, type: 3}
   _throwClip: {fileID: 8300000, guid: 947492a6e6dfd8d41be7296c86e8c49b, type: 3}
+  _gameOverClip: {fileID: 8300000, guid: c1145128922baf94ebf03cd3b5519ccd, type: 3}
 --- !u!1 &3163908302888850609
 GameObject:
   m_ObjectHideFlags: 0

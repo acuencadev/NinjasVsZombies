@@ -23,6 +23,10 @@ namespace NinjasVsZombies.Units
         [SerializeField] private float _throwDelay;
         private float _nextThrowTime;
 
+        [SerializeField] private int _initialKunais;
+
+        private int _numKunais;
+
         [SerializeField] private Transform _kunaiHolder;
 
         [Header("Health")]
@@ -40,8 +44,11 @@ namespace NinjasVsZombies.Units
             base.Start();
 
             _lives = _initialLives;
+            _numKunais = _initialKunais;
+
             GameplayUI.instance.UpdateScore(0);
             GameplayUI.instance.UpdateLives(_lives);
+            GameplayUI.instance.UpdateNumKunais(_numKunais);
         }
 
         private void OnDrawGizmosSelected()
@@ -110,7 +117,7 @@ namespace NinjasVsZombies.Units
 
         public void Throw()
         {
-            if (!CanThrow() || _kunaiPrefab == null)
+            if (!CanThrow() || _kunaiPrefab == null || _numKunais <= 0)
             {
                 return;
             }
@@ -118,6 +125,7 @@ namespace NinjasVsZombies.Units
             AudioManager.instance.PlayClip(_throwClip);
 
             _nextThrowTime = Time.time + _throwDelay;
+            _numKunais--;
 
             _animator.SetTrigger("Throw");
         }
@@ -131,6 +139,8 @@ namespace NinjasVsZombies.Units
 
             Kunai newKunai = Instantiate(_kunaiPrefab, kunaiPosition, _kunaiPrefab.transform.rotation, _kunaiHolder);
             newKunai._movementDirection = kunaiDirection;
+
+            GameplayUI.instance.UpdateNumKunais(_numKunais);
         }
 
         private bool CanThrow()

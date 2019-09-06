@@ -12,6 +12,7 @@ namespace NinjasVsZombies.UI
         [Header("HUD")]
         [SerializeField] private Text _scoreText;
         [SerializeField] private Text _livesText;
+        [SerializeField] private Text _numKunais;
 
         [Header("Pause")]
         [SerializeField] private GameObject _pausePanel;
@@ -81,6 +82,11 @@ namespace NinjasVsZombies.UI
         public void UpdateLives(int newLives)
         {
             _livesText.text = $"Lives: {newLives}";
+        }
+
+        public void UpdateNumKunais(int kunais)
+        {
+            _numKunais.text = $"Kunai: {kunais}";
         }
     }
 }
