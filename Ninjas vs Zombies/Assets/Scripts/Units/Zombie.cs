@@ -11,11 +11,23 @@ namespace NinjasVsZombies.Units
         [Header("Score Points")]
         [SerializeField] private int _pointsPerKill;
 
+        [Header("Collectibles")]
+        [SerializeField] private GameObject[] _collectiblesPrefabs;
+        [SerializeField] private Transform _collectiblesHolder;
+
+        [Range(0, 100)]
+        [SerializeField] private float _minSpawnChance;
+        [SerializeField] private float _maxSpawnChance;
+
+        private float _spawnChance;
+
         private bool _isAlive;
 
         protected override void Start()
         {
             _isAlive = true;
+            _spawnChance = Random.Range(_minSpawnChance, _maxSpawnChance);
+
             Move((float)_movementDirection);
         }
 
@@ -42,6 +54,20 @@ namespace NinjasVsZombies.Units
             }
         }
 
+        private bool ShouldSpawnCollectible()
+        {
+            float random = Random.Range(0f, 1f);
+
+            return random <= _spawnChance;
+        }
+
+        private void SpawnRandomCollectible()
+        {
+            int randomIndex = Random.Range(0, _collectiblesPrefabs.Length);
+
+            Instantiate(_collectiblesPrefabs[randomIndex], transform.position, transform.rotation, _collectiblesHolder);
+        }
+
         public override void Move(float xDirection)
         {
             _lookDirection.Set(xDirection, 0);
@@ -66,7 +92,11 @@ namespace NinjasVsZombies.Units
 
                 ScoreManager.instance.IncreaseScore(_pointsPerKill);
 
-                //FIXME: Fade out the enemy and then destroy it.
+                if (ShouldSpawnCollectible())
+                {
+                    SpawnRandomCollectible();
+                }
+
                 Destroy(gameObject, 20f);
             }
         }
