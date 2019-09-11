@@ -13,15 +13,24 @@ namespace NinjasVsZombies.Units
 
         [Header("Collectibles")]
         [SerializeField] private GameObject[] _collectiblesPrefabs;
-        [SerializeField] private Transform _collectiblesHolder;
+        private Transform _collectiblesHolder;
 
         [Range(0, 100)]
         [SerializeField] private float _minSpawnChance;
+
+        [Range(0, 100)]
         [SerializeField] private float _maxSpawnChance;
 
         private float _spawnChance;
 
         private bool _isAlive;
+
+        protected override void Awake()
+        {
+            base.Awake();
+
+            _collectiblesHolder = GameObject.Find("_Collectibles").transform;
+        }
 
         protected override void Start()
         {

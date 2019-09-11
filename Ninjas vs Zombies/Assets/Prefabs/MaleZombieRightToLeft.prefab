@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -504472973
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b1c223ddc28c9ec468af33adf6d36786, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -166,6 +166,10 @@ MonoBehaviour:
   _speed: 50
   _movementDirection: -1
   _pointsPerKill: 1
+  _collectiblesPrefabs:
+  - {fileID: 7236245132741316411, guid: 61dae255e476d2b4db95832418ad8e5c, type: 3}
+  _minSpawnChance: 0.1
+  _maxSpawnChance: 0.25
 --- !u!1 &7251707612157421256
 GameObject:
   m_ObjectHideFlags: 0
