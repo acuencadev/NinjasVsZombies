@@ -32,6 +32,11 @@ namespace NinjasVsZombies.Units
         [Header("Health")]
         [SerializeField] private int _initialLives;
 
+        [Header("Invincible Time (After taking damage)")]
+        [SerializeField] private float _invincibleTime;
+        private float _invincibleCountdown;
+        private bool _isInvincible;
+
         [Header("SFX")]
         [SerializeField] private AudioClip _attackClip;
         [SerializeField] private AudioClip _throwClip;
@@ -49,6 +54,19 @@ namespace NinjasVsZombies.Units
             GameplayUI.instance.UpdateScore(0);
             GameplayUI.instance.UpdateLives(_lives);
             GameplayUI.instance.UpdateNumKunais(_numKunais);
+        }
+
+        private void Update()
+        {
+            if (_isInvincible)
+            {
+                _invincibleCountdown -= Time.deltaTime;
+
+                if (_invincibleCountdown < 0)
+                {
+                    _isInvincible = false;
+                }
+            }
         }
 
         private void OnDrawGizmosSelected()
@@ -155,17 +173,23 @@ namespace NinjasVsZombies.Units
 
         public void TakeDamage()
         {
-            _lives = Mathf.Clamp(_lives - 1, 0, _initialLives);
-
-            GameplayUI.instance.UpdateLives(_lives);
-
-            if (_lives == 0)
+            if (!_isInvincible)
             {
-                Die();
+                _isInvincible = true;
+                _invincibleCountdown = _invincibleTime;
 
-                GameplayUI.instance.GameOver();
-                AudioManager.instance.PlayClip(_gameOverClip);
-                HighscoreDB.Instance.SetHighscore(ScoreManager.instance.GetScore());
+                _lives = Mathf.Clamp(_lives - 1, 0, _initialLives);
+
+                GameplayUI.instance.UpdateLives(_lives);
+
+                if (_lives == 0)
+                {
+                    Die();
+
+                    GameplayUI.instance.GameOver();
+                    AudioManager.instance.PlayClip(_gameOverClip);
+                    HighscoreDB.Instance.SetHighscore(ScoreManager.instance.GetScore());
+                }
             }
         }
 
