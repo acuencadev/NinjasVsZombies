@@ -53,6 +53,8 @@ namespace NinjasVsZombies.Units
             _lives = _initialLives;
             _numKunais = _initialKunais;
 
+            _currentAction = PlayerAction.Idle;
+
             GameplayUI.instance.UpdateScore(0);
             GameplayUI.instance.UpdateLives(_lives);
             GameplayUI.instance.UpdateNumKunais(_numKunais);
@@ -84,18 +86,21 @@ namespace NinjasVsZombies.Units
 
         public void Attack()
         {
-            if (!CanAttack() && _currentAction != PlayerAction.Attacking)
+            if (!CanAttack())
             {
                 return;
             }
 
-            _nextAttackTime = Time.time + _attackDelay;
+            if (_currentAction == PlayerAction.Idle || _currentAction == PlayerAction.Running)
+            {
+                _nextAttackTime = Time.time + _attackDelay;
 
-            _animator.SetTrigger("Attack");
+                _animator.SetTrigger("Attack");
 
-            AudioManager.instance.PlayClip(_attackClip);
+                AudioManager.instance.PlayClip(_attackClip);
 
-            _currentAction = PlayerAction.Attacking;
+                _currentAction = PlayerAction.Attacking;
+            }
         }
 
         public void StopAction()

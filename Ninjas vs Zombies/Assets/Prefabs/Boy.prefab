@@ -103,7 +103,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1379836689
-  m_SortingLayer: -3
+  m_SortingLayer: -4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 208be7abff59c0044b54d819820b7cd4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -207,6 +207,7 @@ MonoBehaviour:
   _initialKunais: 5
   _kunaiHolder: {fileID: 2110659825}
   _initialLives: 3
+  _invincibleTime: 2
   _attackClip: {fileID: 8300000, guid: 77f4bf62355088245963cdb55728c588, type: 3}
   _throwClip: {fileID: 8300000, guid: 947492a6e6dfd8d41be7296c86e8c49b, type: 3}
   _gameOverClip: {fileID: 8300000, guid: c1145128922baf94ebf03cd3b5519ccd, type: 3}
