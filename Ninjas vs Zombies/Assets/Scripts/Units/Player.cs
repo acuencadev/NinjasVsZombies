@@ -44,6 +44,8 @@ namespace NinjasVsZombies.Units
 
         private int _lives;
 
+        private PlayerAction _currentAction;
+
         protected override void Start()
         {
             base.Start();
@@ -82,7 +84,7 @@ namespace NinjasVsZombies.Units
 
         public void Attack()
         {
-            if (!CanAttack())
+            if (!CanAttack() && _currentAction != PlayerAction.Attacking)
             {
                 return;
             }
@@ -92,6 +94,13 @@ namespace NinjasVsZombies.Units
             _animator.SetTrigger("Attack");
 
             AudioManager.instance.PlayClip(_attackClip);
+
+            _currentAction = PlayerAction.Attacking;
+        }
+
+        public void StopAction()
+        {
+            _currentAction = PlayerAction.Idle;
         }
 
         public override void Move(float xDirection)
@@ -105,6 +114,8 @@ namespace NinjasVsZombies.Units
             Vector2 newPos = _rb2d.position + _lookDirection * _speed * Time.deltaTime;
 
             _rb2d.MovePosition(newPos);
+
+            _currentAction = PlayerAction.Running;
         }
 
         public override void Die()
@@ -116,6 +127,8 @@ namespace NinjasVsZombies.Units
         public void StopMoving()
         {
             _animator.SetFloat("Speed", 0);
+
+            _currentAction = PlayerAction.Idle;
         }
 
         public void Jump()
@@ -140,12 +153,17 @@ namespace NinjasVsZombies.Units
                 return;
             }
 
-            AudioManager.instance.PlayClip(_throwClip);
+            if (_currentAction == PlayerAction.Idle || _currentAction == PlayerAction.Running)
+            {
+                _currentAction = PlayerAction.Throwing;
 
-            _nextThrowTime = Time.time + _throwDelay;
-            _numKunais--;
+                AudioManager.instance.PlayClip(_throwClip);
 
-            _animator.SetTrigger("Throw");
+                _nextThrowTime = Time.time + _throwDelay;
+                _numKunais--;
+
+                _animator.SetTrigger("Throw");
+            }
         }
 
         public void ThrowKunai()
